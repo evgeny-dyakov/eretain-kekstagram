@@ -1,11 +1,9 @@
-import {genData} from './gen-data.js';
+import {getTestData} from './get-test-data.js';
 
-const pictures = document.querySelector('.pictures');
+const galery = document.querySelector('.pictures');
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const data = genData();
-
-data.forEach(({url, likes, comments}) => {
+getTestData().forEach(({url, likes, comments}) => {
   const thumbnail = thumbnailTemplate.cloneNode(true);
 
   const thumbnailImg = thumbnail.querySelector('.picture__img');
@@ -16,5 +14,5 @@ data.forEach(({url, likes, comments}) => {
   thumbnailLikes.textContent = likes;
   thumbnailComments.textContent = comments.length;
 
-  pictures.append(thumbnail);
+  galery.append(thumbnail);
 });

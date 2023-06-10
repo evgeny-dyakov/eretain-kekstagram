@@ -34,17 +34,17 @@ const getDescriptions = (quantity) => {
   ];
 
   if (descriptions.length < quantity) {
-    return null;
+    return;
   }
 
   return shuffleArray(descriptions).slice(0, quantity);
 };
 
 const getLikes = (quantity) => {
+  const likes = [];
+
   const minLikes = 15;
   const maxLikes = 200;
-
-  const likes = [];
 
   for (let i = 0; i < quantity; i++) {
     likes[i] = getRandomInt(minLikes, maxLikes);
@@ -54,32 +54,33 @@ const getLikes = (quantity) => {
 };
 
 const getCommentsQuantityPerPhotoList = (photosQuantity, minCommentsPerPhoto, maxCommentsPerPhoto) => {
-  const result = [];
+  const commentsQuantityPerPhotoList = [];
 
   for (let i = 0; i < photosQuantity; i++) {
-    result[i] = (getRandomInt(minCommentsPerPhoto, maxCommentsPerPhoto));
+    commentsQuantityPerPhotoList[i] = (getRandomInt(minCommentsPerPhoto, maxCommentsPerPhoto));
   }
 
-  return result;
+  return commentsQuantityPerPhotoList;
 };
 
 const getCommentsIds = (commentsQuantity) => {
   const minCommentsId = 100;
   const maxIdCorrector = minCommentsId - 1;
+
   return getUnorderedArray(minCommentsId, commentsQuantity + maxIdCorrector);
 };
 
 const getAvatars = (commentsQuantity) => {
-  const result = [];
+  const avatars = [];
 
   const minAvatarNum = 1;
   const maxAvatarNum = 6;
 
   for (let i = 0; i < commentsQuantity; i++) {
-    result[i] = (`img/avatar-${getRandomInt(minAvatarNum, maxAvatarNum)}.svg`);
+    avatars[i] = `img/avatar-${getRandomInt(minAvatarNum, maxAvatarNum)}.svg`;
   }
 
-  return result;
+  return avatars;
 };
 
 const getMessages = (commentsQuantity) => {
@@ -92,7 +93,7 @@ const getMessages = (commentsQuantity) => {
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
   ];
 
-  const result = [];
+  const messages = [];
 
   const minNumberSentencesInMessage = 1;
   const maxNumberSentencesInMessage = 2;
@@ -100,26 +101,27 @@ const getMessages = (commentsQuantity) => {
   for (let i = 0; i < commentsQuantity; i++) {
     const message = [];
     const quantitySentencesInMessage = getRandomInt(minNumberSentencesInMessage, maxNumberSentencesInMessage);
-
     const sentencesIndexes = [];
+
     for (let j = 0; j < quantitySentencesInMessage; j++) {
       if (j > availableSentences.length - 1) {
-        console.error(`колличество предложений в сообщении ${i + 1}: ${quantitySentencesInMessage}, превысило количество доступных предложений: ${availableSentences.length}, сообщение сформированно только из доступных предложений`);
         break;
       }
+
       let sentenceIndex = getRandomInt(0, availableSentences.length - 1);
       while (sentencesIndexes.includes(sentenceIndex)) {
         sentenceIndex = getRandomInt(0, availableSentences.length - 1);
       }
       sentencesIndexes.push(sentenceIndex);
     }
+
     for (let k = 0; k < sentencesIndexes.length; k++) {
       message[k] = availableSentences[sentencesIndexes[k]];
     }
-
-    result[i] = message.join(' ');
+    messages[i] = message.join(' ');
   }
-  return result;
+
+  return messages;
 };
 
 const getNames = (commentsQuantity) => {
@@ -135,23 +137,24 @@ const getNames = (commentsQuantity) => {
     'Никита',
     'Ольга',
   ];
-  const result = [];
+
+  const names = [];
 
   for (let i = 0; i < commentsQuantity; i++) {
-    result[i] = availableNames[getRandomInt(0, availableNames.length - 1)];
+    names[i] = availableNames[getRandomInt(0, availableNames.length - 1)];
   }
 
-  return result;
+  return names;
 };
 
 const getComments = (photosQuantity) => {
-  const result = [];
+  const comments = [];
 
   const minCommentsPerPhoto = 5;
   const maxCommentsPerPhoto = 15;
 
   const commentsQuantityPerPhotoList = getCommentsQuantityPerPhotoList(photosQuantity, minCommentsPerPhoto, maxCommentsPerPhoto);
-  const commentsQuantity = commentsQuantityPerPhotoList.reduce((el, total) => total + el);
+  const commentsQuantity = commentsQuantityPerPhotoList.reduce((el, total) => el + total);
 
   const commentsIds = getCommentsIds(commentsQuantity);
   const avatars = getAvatars(commentsQuantity);
@@ -172,14 +175,14 @@ const getComments = (photosQuantity) => {
       commentsForOnePhoto[j] = comment;
       k++;
     }
-    result[i] = commentsForOnePhoto;
+    comments[i] = commentsForOnePhoto;
   }
-  return result;
+  return comments;
 };
 
-const genData = () => {
+const getTestData = () => {
   const quantity = 25;
-  const data = [];
+  const testData = [];
 
   const ids = getIds(quantity);
   const urls = getUrls(quantity);
@@ -196,10 +199,10 @@ const genData = () => {
       comments: comments[i],
     };
 
-    data[i] = photo;
+    testData[i] = photo;
   }
 
-  return data;
+  return testData;
 };
 
-export {genData};
+export {getTestData};
