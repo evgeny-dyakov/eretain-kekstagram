@@ -1,9 +1,9 @@
-import {getTestData} from './get-test-data.js';
+import {testData} from './get-test-data.js';
 
 const galery = document.querySelector('.pictures');
 const thumbnailTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-getTestData().forEach(({url, likes, comments}) => {
+testData.forEach(({url, likes, comments}) => {
   const thumbnail = thumbnailTemplate.cloneNode(true);
 
   const thumbnailImg = thumbnail.querySelector('.picture__img');

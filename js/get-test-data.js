@@ -182,7 +182,7 @@ const getComments = (photosQuantity) => {
 
 const getTestData = () => {
   const quantity = 25;
-  const testData = [];
+  const result = [];
 
   const ids = getIds(quantity);
   const urls = getUrls(quantity);
@@ -199,10 +199,13 @@ const getTestData = () => {
       comments: comments[i],
     };
 
-    testData[i] = photo;
+    result[i] = photo;
   }
 
-  return testData;
+  return result;
 };
 
-export {getTestData};
+const testData = getTestData();
+console.log(testData);
+
+export {testData};
