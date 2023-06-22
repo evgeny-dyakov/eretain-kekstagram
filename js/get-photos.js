@@ -180,9 +180,9 @@ const getComments = (photosQuantity) => {
   return comments;
 };
 
-const getTestData = () => {
+const getPhotos = () => {
   const quantity = 25;
-  const result = [];
+  const photos = [];
 
   const ids = getIds(quantity);
   const urls = getUrls(quantity);
@@ -199,13 +199,12 @@ const getTestData = () => {
       comments: comments[i],
     };
 
-    result[i] = photo;
+    photos[i] = photo;
   }
 
-  return result;
+  return photos;
 };
 
-const testData = getTestData();
-console.log(testData);
+const photos = getPhotos();
 
-export {testData};
+export {photos};

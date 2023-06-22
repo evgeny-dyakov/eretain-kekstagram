@@ -1,4 +1,4 @@
-import {testData} from './get-test-data.js';
+import {photos} from './get-photos.js';
 
 const galery = document.querySelector('.pictures');
 const thumbnails = galery.querySelectorAll('.picture');
@@ -13,7 +13,7 @@ const fullPhotoCloseButton = fullPhoto.querySelector('.big-picture__cancel');
 
 const renderComments = (i) => {
   fullPhotoComments.innerHTML = '';
-  testData[i].comments.forEach(({avatar, name, message}) => {
+  photos[i].comments.forEach(({avatar, name, message}) => {
 
     const comment = document.createElement('li');
     comment.classList.add('social__comment');
@@ -23,7 +23,8 @@ const renderComments = (i) => {
       src="${avatar}"
       alt="${name}"
       width="35" height="35">
-      <p class="social__text">${message}</p>`;
+      <p class="social__text">${message}</p>
+      `;
 
     fullPhotoComments.append(comment);
   });
@@ -33,25 +34,26 @@ const renderFullPhoto = (i) => {
   document.body.classList.add('modal-open');
 
   fullPhoto.classList.remove('hidden');
-  fullPhotoImg.src = testData[i].url;
-  fullPhotoLikesCount.textContent = testData[i].likes;
-  fullPhotoCommentsCount.textContent = testData[i].comments.length;
-  fullPhotoDescription.textContent = testData[i].description;
+  fullPhotoImg.src = photos[i].url;
+  fullPhotoLikesCount.textContent = photos[i].likes;
+  fullPhotoCommentsCount.textContent = photos[i].comments.length;
+  fullPhotoDescription.textContent = photos[i].description;
 
   renderComments(i);
 
   fullPhotoCloseButton.addEventListener('click', onFullPhotoCloseButtonClick);
-  document.body.addEventListener('keydown', onBodyEscapeDown);
+  document.addEventListener('keydown', onBodyEscapeDown);
   galery.removeEventListener('click', onThumbnailClick);
 };
 
 function onBodyEscapeDown (evt) {
   if (evt.key === 'Escape') {
+    evt.preventDefault();
     fullPhoto.classList.add('hidden');
     document.body.classList.remove('modal-open');
 
     galery.addEventListener('click', onThumbnailClick);
-    document.body.removeEventListener('keydown', onBodyEscapeDown);
+    document.removeEventListener('keydown', onBodyEscapeDown);
   }
 }
 
