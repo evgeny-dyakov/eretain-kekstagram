@@ -1395,3 +1395,34 @@ main {
 .hidden {
   display: none;
 }
+
+/* валидация формы загрузки изображения */
+
+.validation-error input,
+.validation-error textarea {
+  background: #ff7777;
+}
+
+/* .validation-success input,
+.validation-success textarea {
+  background: #8dff9f;
+} */
+
+.img-upload__field-wrapper {
+  position: relative;
+}
+
+.validation-error-text {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.img-upload__field-wrapper:first-child .validation-error-text {
+  bottom: 0;
+}
+
+.img-upload__field-wrapper:last-child .validation-error-text {
+  bottom: -15px;
+}
+

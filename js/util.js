@@ -30,4 +30,14 @@ const getOrderedArray = (min, max) => {
 
 const getUnorderedArray = (min, max) => shuffleArray(getOrderedArray(min, max));
 
-export {getRandomInt, shuffleArray, getOrderedArray, getUnorderedArray};
+function removeStringInArray (array, string) {
+  const fixedArray = [];
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] !== string) {
+      fixedArray.push(array[i]);
+    }
+  }
+  return fixedArray;
+}
+
+export {getRandomInt, shuffleArray, getOrderedArray, getUnorderedArray, checkMaxStringLength, removeStringInArray};

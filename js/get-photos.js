@@ -182,7 +182,7 @@ const getComments = (photosQuantity) => {
 
 const getPhotos = () => {
   const quantity = 25;
-  const photos = [];
+  const result = [];
 
   const ids = getIds(quantity);
   const urls = getUrls(quantity);
@@ -199,10 +199,10 @@ const getPhotos = () => {
       comments: comments[i],
     };
 
-    photos[i] = photo;
+    result[i] = photo;
   }
 
-  return photos;
+  return result;
 };
 
 const photos = getPhotos();
