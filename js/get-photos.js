@@ -150,7 +150,7 @@ const getNames = (commentsQuantity) => {
 const getComments = (photosQuantity) => {
   const comments = [];
 
-  const minCommentsPerPhoto = 5;
+  const minCommentsPerPhoto = 3;
   const maxCommentsPerPhoto = 15;
 
   const commentsQuantityPerPhotoList = getCommentsQuantityPerPhotoList(photosQuantity, minCommentsPerPhoto, maxCommentsPerPhoto);
