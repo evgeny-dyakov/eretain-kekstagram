@@ -1,3 +1,3 @@
 import './render-thumbnails.js';
-import './render-full-photo.js';
+import './full-photo-window.js';
 import './form.js';
